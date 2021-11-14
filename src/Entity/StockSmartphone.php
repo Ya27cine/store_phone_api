@@ -8,7 +8,11 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      attributes={
+ *                 "order"={"id": "DESC"}
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=StockSmartphoneRepository::class)
  */
 class StockSmartphone

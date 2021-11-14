@@ -9,7 +9,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      attributes={
+ *                 "order"={"id": "DESC"}
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=SmartphoneRepository::class)
  */
 class Smartphone
@@ -42,7 +46,7 @@ class Smartphone
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=StockSmartphone::class, mappedBy="Smartphone")
+     * @ORM\OneToMany(targetEntity=StockSmartphone::class, mappedBy="smartphone")
      */
     private $stockSmartphones;
 
