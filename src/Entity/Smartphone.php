@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\SmartphoneRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -47,6 +48,7 @@ class Smartphone
 
     /**
      * @ORM\OneToMany(targetEntity=StockSmartphone::class, mappedBy="smartphone")
+     * @ApiSubresource()
      */
     private $stockSmartphones;
 
