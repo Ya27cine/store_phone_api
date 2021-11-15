@@ -2,12 +2,24 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use App\Repository\StockSmartphoneRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
+
 
 
 /**
+ * 
+ * @ApiFilter(PropertyFilter::class,
+ *      arguments={
+ *           "parameterName": "properties",
+ *           "overrideDefaultProperties": false,
+ *           "whitelist": {"id", "color", "rom", "ram", "price"}
+ *      }
+ * )
+ * 
  * @ApiResource(
  *      attributes={
  *                 "order"={"id": "DESC"}
