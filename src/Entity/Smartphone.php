@@ -12,7 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ApiResource(
  *      attributes={
- *                 "order"={"id": "DESC"}
+ *                 "order"={"id": "DESC"},
+ *                 "formats"={"json", "jsonld" }
  *      }
  * )
  * @ORM\Entity(repositoryClass=SmartphoneRepository::class)
@@ -47,6 +48,13 @@ class Smartphone
     private $description;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Image::class)
+     * @ORM\JoinTable()
+     * @ApiSubresource()
+     */
+    private $images;
+
+    /**
      * @ORM\OneToMany(targetEntity=StockSmartphone::class, mappedBy="smartphone")
      * @ApiSubresource()
      */
@@ -55,6 +63,7 @@ class Smartphone
     public function __construct()
     {
         $this->stockSmartphones = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,6 +145,30 @@ class Smartphone
                 $stockSmartphone->setSmartphone(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }
