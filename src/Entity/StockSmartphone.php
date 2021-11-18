@@ -8,8 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
 
-
-
 /**
  * 
  * @ApiFilter(PropertyFilter::class,
@@ -22,7 +20,8 @@ use ApiPlatform\Core\Serializer\Filter\PropertyFilter;
  * 
  * @ApiResource(
  *      attributes={
- *                 "order"={"id": "DESC"}
+ *                 "order"={"id": "DESC"},
+ *                 "formats"={"json", "jsonld" }
  *      }
  * )
  * @ORM\Entity(repositoryClass=StockSmartphoneRepository::class)
