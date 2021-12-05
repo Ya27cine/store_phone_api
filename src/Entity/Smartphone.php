@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource(
  *      attributes={
  *                 "order"={"id": "DESC"},
- *                 "formats"={"json", "jsonld" }
+ *                 "formats"={"json", "jsonld"}
  *      }
  * )
  * @ORM\Entity(repositoryClass=SmartphoneRepository::class)

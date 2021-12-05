@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -32,6 +33,7 @@ class StoreDashboardController extends AbstractDashboardController
        // yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
       //  yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Smartphones', 'fas fa-phone', Smartphone::class);
+        yield MenuItem::linkToCrud('Images', 'fas fa-phone', Image::class);
         yield MenuItem::linkToCrud('Stock', 'fas fa-list', StockSmartphone::class);
 
     }
