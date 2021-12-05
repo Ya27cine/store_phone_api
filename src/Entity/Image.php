@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\UploadImageActionController;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          attributes={
  *              "formats"={"json", "jsonld", "form"={"multipart/form-data"}}
  *          },
+ *          normalizationContext={"groups"={"read"}},
  *          collectionOperations={
  *                      "get",
  *                      "post"={
@@ -25,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          }
  * )
  * @ORM\Entity(repositoryClass=ImageRepository::class)
- * @Vich\Uploadable()
+ * @Vich\Uploadable
  */
 class Image
 {
@@ -33,6 +35,7 @@ class Image
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("read")
      */
     private $id;
 
@@ -41,12 +44,12 @@ class Image
      * @Vich\UploadableField(mapping="smartphones", fileNameProperty="url")
      * @Assert\NotNull
      */
-    private $file;
+    private $imagefile;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $url;
+    private $imageName;
 
     /**
      * @ORM\Column(type="string", length=120, nullable=true)
@@ -56,18 +59,6 @@ class Image
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
     }
 
     public function getAlt(): ?string
@@ -83,15 +74,39 @@ class Image
     }
 
 
-    public function getFile()
-    {
-        return $this->file;
-    }
+	/**
+	 * 
+	 * @return mixed
+	 */
+	function getImagefile() {
+		return $this->imagefile;
+	}
+	
+	/**
+	 * 
+	 * @param mixed $imagefile 
+	 * @return Image
+	 */
+	function setImagefile($imagefile): self {
+		$this->imagefile = $imagefile;
+		return $this;
+	}
 
-    public function setFile($file)
-    {
-        $this->file = $file;
-
-        return $this;
-    }
+	/**
+	 * 
+	 * @return mixed
+	 */
+	function getImageName() {
+		return $this->imageName;
+	}
+	
+	/**
+	 * 
+	 * @param mixed $imageName 
+	 * @return Image
+	 */
+	function setImageName($imageName): self {
+		$this->imageName = $imageName;
+		return $this;
+	}
 }
