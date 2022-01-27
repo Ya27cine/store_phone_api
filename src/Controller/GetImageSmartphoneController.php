@@ -28,16 +28,6 @@ class GetImageSmartphoneController  extends AbstractController{
     }
 
 
-
-      public function getNameImagebyIDSmartp($id, ){
-         try {
-            
-         } catch (\Throwable $th) {
-            $image = null;
-         }
-         return $image;
-      }
-
     /**
      * @Route("api/images/data/{id}")
      */
@@ -54,12 +44,11 @@ class GetImageSmartphoneController  extends AbstractController{
 
          return new BinaryFileResponse($fileImage);
 
-        } catch (\Throwable $th) {
-           // $post->setImage(  );
+        } catch (\Throwable $error) {
            return new Response(null, 400);
           
         }
-      return new Response(null, 400);
+      return new Response(null, 200);
      }
 
 	/**
