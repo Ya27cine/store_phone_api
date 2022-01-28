@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Smartphone
+{% endblock %}
+
+{% block body %}
+	<div class="container my-4">
+		<div class="row">
+			<div class="col-md-8">
+				<h1>Edit Smartphone</h1>
+
+			</div>
+
+			<div class="col-md-4">
+				<a class="btn btn-primary btn-block" href="{{ path('smartphone_index') }}">back to list</a>
+
+			</div>
+		</div>
+
+		<div class="row">
+			{{ include('smartphone/_form.html.twig', {'button_label': 'Update'}) }}
+		</div>
+		{{ include('smartphone/_delete_form.html.twig') }}
+
+	</div>
+
+
+{% endblock %}
