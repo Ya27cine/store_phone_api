@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Smartphone index
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container my-5">
+		<div class="row">
+			<div class="col-md-9">
+				<h1>Smartphone index</h1>
+
+			</div>
+			<div class="col-md-3">
+				<a class="btn btn-success btn-block" href="{{ path('smartphone_new') }}">Create new</a>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Marque</th>
+						<th>Model</th>
+						<th>Name</th>
+						<th>Description</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for smartphone in smartphones %}
+						<tr>
+							<td>{{ smartphone.id }}</td>
+							<td>{{ smartphone.Marque }}</td>
+							<td>{{ smartphone.Model }}</td>
+							<td>{{ smartphone.Name }}</td>
+							<td>{{ smartphone.description }}</td>
+							<td>
+								<a class="btn btn-primary" href="{{ path('smartphone_show', {'id': smartphone.id}) }}">show</a>
+								<a class="btn btn-danger" href="{{ path('smartphone_edit', {'id': smartphone.id}) }}">edit</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="6">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+{% endblock %}

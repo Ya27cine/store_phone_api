@@ -48,7 +48,7 @@ class Smartphone
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Image::class)
+     * @ORM\ManyToMany(targetEntity=Image::class, cascade={"persist"})
      * @ORM\JoinTable()
      * @ApiSubresource()
      */
