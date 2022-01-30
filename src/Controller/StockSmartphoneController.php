@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\SmartphoneRepository;
+use App\Entity\Smartphone;
 
 /**
  * @Route("/admin/stock/smartphone")
@@ -19,7 +20,7 @@ class StockSmartphoneController extends AbstractController
     /**
      * @Route("/{marque}/{id}", name="stock_smartphone_index", methods={"GET"})
      */
-    public function index($marque, $id, StockSmartphoneRepository $stockSmartphoneRepository): Response
+    public function index($marque, $id, StockSmartphoneRepository $stockSmartphoneRepository, SmartphoneRepository $smartphoneRepository): Response
     {
         /**
          * @var StockSmartphone
@@ -28,13 +29,18 @@ class StockSmartphoneController extends AbstractController
             'smartphone' => $id
         ]);
 
-       // dd("d;lf");
+        // if  $_variants  is NULL ???
+
+
+        /**
+         * @var Smartphone
+         */
+        $smartphone = $smartphoneRepository->find($id);
+
 
         return $this->render('stock_smartphone/index.html.twig', [
             'stock_smartphones' => $_variants,
-            'marque' => $marque,
-            'id_smartphone' => $id
-
+            'smartphone' => $smartphone,
         ]);
     }
 
@@ -78,15 +84,24 @@ class StockSmartphoneController extends AbstractController
     /**
      * @Route("/{id_smartphone}/{id}/edit", name="stock_smartphone_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request,$id_smartphone, StockSmartphone $stockSmartphone): Response
+    public function edit(Request $request,$id_smartphone, StockSmartphone $stockSmartphone,SmartphoneRepository $smartphoneRepository): Response
     {
+        // get smartphone
+        /**
+         * @var Smartphone
+         */
+        $smartphone = $smartphoneRepository->find($id_smartphone);
+
         $form = $this->createForm(StockSmartphoneType::class, $stockSmartphone);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('stock_smartphone_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('stock_smartphone_index', [
+                'id' => $smartphone->getId(),
+                'marque' => $smartphone->getMarque()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('stock_smartphone/edit.html.twig', [
