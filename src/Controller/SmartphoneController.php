@@ -19,10 +19,14 @@ class SmartphoneController extends AbstractController
     /**
      * @Route("/", name="smartphone_index", methods={"GET"})
      */
-    public function index(SmartphoneRepository $smartphoneRepository): Response
+    public function index(Request $request, SmartphoneRepository $smartphoneRepository): Response
     {
+         $filtre_marque  = $request->query->get('marque');
+
         return $this->render('smartphone/index.html.twig', [
-            'smartphones' => $smartphoneRepository->findAll(),
+            'smartphones' => $smartphoneRepository->findBy([
+                'Marque' => $filtre_marque
+            ]),
         ]);
     }
 

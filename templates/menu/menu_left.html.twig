@@ -1,0 +1,14 @@
+{% set  _marques = [
+    'Samsung', 'Appel', 'Hauwei','Redmi','RealMe','Xperia','LG','Nokia'
+]%}
+
+<div class="list-group">
+	<a href="" class="list-group-item list-group-item-action active">
+		All
+	</a>
+	{% for marque in _marques %}
+		<a href="{{ path('smartphone_index', {'marque': marque})}}" class="list-group-item list-group-item-action">{{ marque }}</a>
+	{% endfor %}
+
+
+</div>
