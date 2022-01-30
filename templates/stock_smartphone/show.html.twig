@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StockSmartphone{% endblock %}
+
+{% block body %}
+    <h1>StockSmartphone</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ stock_smartphone.id }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ stock_smartphone.color }}</td>
+            </tr>
+            <tr>
+                <th>Rom</th>
+                <td>{{ stock_smartphone.rom }}</td>
+            </tr>
+            <tr>
+                <th>Ram</th>
+                <td>{{ stock_smartphone.ram }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ stock_smartphone.year }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ stock_smartphone.price }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ stock_smartphone.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ stock_smartphone.status }}</td>
+            </tr>
+            <tr>
+                <th>Imei</th>
+                <td>{{ stock_smartphone.imei }}</td>
+            </tr>
+            <tr>
+                <th>Sn</th>
+                <td>{{ stock_smartphone.sn }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('stock_smartphone_index') }}">back to list</a>
+
+    <a href="{{ path('stock_smartphone_edit', {'id': stock_smartphone.id}) }}">edit</a>
+
+    {{ include('stock_smartphone/_delete_form.html.twig') }}
+{% endblock %}
