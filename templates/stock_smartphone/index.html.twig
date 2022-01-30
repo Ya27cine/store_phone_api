@@ -13,7 +13,7 @@
 
 			</div>
 			<div class="col-md-5">
-				<a class="btn btn-success btn-block" href="{{ path('stock_smartphone_new') }}">Create new</a>
+				<a class="btn btn-success btn-block" href="{{ path('stock_smartphone_new', {'id_smartphone':id_smartphone,'marque':marque}) }}">Create new</a>
 
 			</div>
 
@@ -50,7 +50,7 @@
 							<td>{{ stock_smartphone.sn }}</td>
 							<td>
 								<a class="btn btn-primary" href="{{ path('stock_smartphone_show', {'id': stock_smartphone.id}) }}">show</a>
-								<a class="btn btn-danger" href="{{ path('stock_smartphone_edit', {'id': stock_smartphone.id}) }}">edit</a>
+								<a class="btn btn-danger" href="{{ path('stock_smartphone_edit', {'id': stock_smartphone.id, 'id_smartphone': stock_smartphone.smartphone.id}) }}">edit</a>
 							</td>
 						</tr>
 					{% else %}

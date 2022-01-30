@@ -1,13 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit StockSmartphone{% endblock %}
+{% block title %}Edit StockSmartphone
+{% endblock %}
 
 {% block body %}
-    <h1>Edit StockSmartphone</h1>
 
-    {{ include('stock_smartphone/_form.html.twig', {'button_label': 'Update'}) }}
+	<div class="container my-5">
+		<div class="row">
+			<div class="col-md-8">
+				<h1>Edit StockSmartphone</h1>
 
-    <a href="{{ path('stock_smartphone_index') }}">back to list</a>
+			</div>
+			<div class="col-md-4">
+				<a class="btn btn-info btn-block" href="{{ path('stock_smartphone_index',{'id': stock_smartphone.smartphone.id, 'marque': stock_smartphone.smartphone.Marque} ) }}">back to list</a>
+			</div>
 
-    {{ include('stock_smartphone/_delete_form.html.twig') }}
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				{{ include('stock_smartphone/_form.html.twig', {'button_label': 'Update'}) }}
+
+			</div>
+		</div>
+	</div>
+
+
+	{{ include('stock_smartphone/_delete_form.html.twig') }}
 {% endblock %}

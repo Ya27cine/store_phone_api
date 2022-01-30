@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\SmartphoneRepository;
 
 /**
  * @Route("/admin/stock/smartphone")
@@ -16,20 +17,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class StockSmartphoneController extends AbstractController
 {
     /**
-     * @Route("/", name="stock_smartphone_index", methods={"GET"})
+     * @Route("/{marque}/{id}", name="stock_smartphone_index", methods={"GET"})
      */
-    public function index(StockSmartphoneRepository $stockSmartphoneRepository): Response
+    public function index($marque, $id, StockSmartphoneRepository $stockSmartphoneRepository): Response
     {
+        /**
+         * @var StockSmartphone
+         */
+        $_variants = $stockSmartphoneRepository->findBy([
+            'smartphone' => $id
+        ]);
+
+       // dd("d;lf");
+
         return $this->render('stock_smartphone/index.html.twig', [
-            'stock_smartphones' => $stockSmartphoneRepository->findAll(),
+            'stock_smartphones' => $_variants,
+            'marque' => $marque,
+            'id_smartphone' => $id
+
         ]);
     }
 
     /**
-     * @Route("/new", name="stock_smartphone_new", methods={"GET","POST"})
+     * @Route("/{marque}/{id_smartphone}/new", name="stock_smartphone_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new($marque, $id_smartphone,Request $request,SmartphoneRepository $smartphoneRepository): Response
     {
+        // get smartphone
+        $smartphone = $smartphoneRepository->find($id_smartphone);
+
         $stockSmartphone = new StockSmartphone();
         $form = $this->createForm(StockSmartphoneType::class, $stockSmartphone);
         $form->handleRequest($request);
@@ -45,6 +61,7 @@ class StockSmartphoneController extends AbstractController
         return $this->render('stock_smartphone/new.html.twig', [
             'stock_smartphone' => $stockSmartphone,
             'form' => $form->createView(),
+            'smartphone' => $smartphone,
         ]);
     }
 
@@ -59,9 +76,9 @@ class StockSmartphoneController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="stock_smartphone_edit", methods={"GET","POST"})
+     * @Route("/{id_smartphone}/{id}/edit", name="stock_smartphone_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, StockSmartphone $stockSmartphone): Response
+    public function edit(Request $request,$id_smartphone, StockSmartphone $stockSmartphone): Response
     {
         $form = $this->createForm(StockSmartphoneType::class, $stockSmartphone);
         $form->handleRequest($request);
