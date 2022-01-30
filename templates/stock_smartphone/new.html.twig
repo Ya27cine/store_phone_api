@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StockSmartphone
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row my-4">
+			<div class="col-md-7">
+				<h4>Create new variant for
+					{{ smartphone.marque}}
+					/
+					{{smartphone.name}}</h4>
+
+			</div>
+			<div class="col-md-5">
+				<a class="btn btn-block btn-info" href="{{ path('stock_smartphone_index',{'marque': smartphone.marque,'id': smartphone.id}) }}">back to list</a>
+
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md">
+				{{ include('stock_smartphone/_form.html.twig') }}
+
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

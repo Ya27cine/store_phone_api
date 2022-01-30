@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StockSmartphone index
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container my-5">
+		<div class="row">
+			<div class="col-md-7">
+				<h1>StockSmartphone index</h1>
+
+			</div>
+			<div class="col-md-5">
+				<a class="btn btn-success btn-block" href="{{ path('stock_smartphone_new', {'id_smartphone':id_smartphone,'marque':marque}) }}">Create new</a>
+
+			</div>
+
+		</div>
+		<div class="row my-2">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Color</th>
+						<th>Rom</th>
+						<th>Ram</th>
+						<th>Year</th>
+						<th>Price</th>
+						<th>Quantity</th>
+						<th>Status</th>
+						<th>Imei</th>
+						<th>Sn</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for stock_smartphone in stock_smartphones %}
+						<tr>
+							<td>{{ stock_smartphone.id }}</td>
+							<td>{{ stock_smartphone.color }}</td>
+							<td>{{ stock_smartphone.rom }}</td>
+							<td>{{ stock_smartphone.ram }}</td>
+							<td>{{ stock_smartphone.year }}</td>
+							<td>{{ stock_smartphone.price }}</td>
+							<td>{{ stock_smartphone.quantity }}</td>
+							<td>{{ stock_smartphone.status }}</td>
+							<td>{{ stock_smartphone.imei }}</td>
+							<td>{{ stock_smartphone.sn }}</td>
+							<td>
+								<a class="btn btn-primary" href="{{ path('stock_smartphone_show', {'id': stock_smartphone.id}) }}">show</a>
+								<a class="btn btn-danger" href="{{ path('stock_smartphone_edit', {'id': stock_smartphone.id, 'id_smartphone': stock_smartphone.smartphone.id}) }}">edit</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="11">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+{% endblock %}

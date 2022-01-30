@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use Symfony\Component\HttpFoundation\File\File;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Controller\UploadImageActionController;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use App\Entity\Smartphone;
+
 
 use Symfony\Component\Validator\Constraints as Assert;
 /**
@@ -41,10 +44,11 @@ class Image
 
 
     /**
-     * @Vich\UploadableField(mapping="smartphones", fileNameProperty="url")
+     * @Vich\UploadableField(mapping="smartphones", fileNameProperty="imageName")
      * @Assert\NotNull
+     * @var File
      */
-    private $imagefile;
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -55,6 +59,7 @@ class Image
      * @ORM\Column(type="string", length=120, nullable=true)
      */
     private $alt;
+
 
     public function getId(): ?int
     {
@@ -78,24 +83,6 @@ class Image
 	 * 
 	 * @return mixed
 	 */
-	function getImagefile() {
-		return $this->imagefile;
-	}
-	
-	/**
-	 * 
-	 * @param mixed $imagefile 
-	 * @return Image
-	 */
-	function setImagefile($imagefile): self {
-		$this->imagefile = $imagefile;
-		return $this;
-	}
-
-	/**
-	 * 
-	 * @return mixed
-	 */
 	function getImageName() {
 		return $this->imageName;
 	}
@@ -107,6 +94,35 @@ class Image
 	 */
 	function setImageName($imageName): self {
 		$this->imageName = $imageName;
+		return $this;
+	}
+
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+	/**
+	 * 
+	 * @return mixed
+	 */
+	function getSmartphone() {
+		return $this->smartphone;
+	}
+	
+	/**
+	 * 
+	 * @param mixed $smartphone 
+	 * @return Image
+	 */
+	function setSmartphone($smartphone): self {
+		$this->smartphone = $smartphone;
 		return $this;
 	}
 }
