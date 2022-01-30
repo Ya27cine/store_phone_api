@@ -21,12 +21,19 @@ class SmartphoneController extends AbstractController
      */
     public function index(Request $request, SmartphoneRepository $smartphoneRepository): Response
     {
-         $filtre_marque  = $request->query->get('marque');
+        $filtre_marque  = $request->query->get('marque');
+
+        if($filtre_marque){
+            $smartphones = $smartphoneRepository->findBy([
+                'Marque' => $filtre_marque
+            ]);
+        }else{
+            $smartphones = $smartphoneRepository->findAll();
+        }
 
         return $this->render('smartphone/index.html.twig', [
-            'smartphones' => $smartphoneRepository->findBy([
-                'Marque' => $filtre_marque
-            ]),
+            'smartphones' => $smartphones,
+            'choice_marque' => $filtre_marque
         ]);
     }
 
