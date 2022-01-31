@@ -27,10 +27,10 @@ class Smartphone
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $Marque;
+    // /**
+    //  * @ORM\Column(type="string", length=255)
+    //  */
+    // private $Marque;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -60,6 +60,11 @@ class Smartphone
      */
     private $stockSmartphones;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Marque::class, inversedBy="smartphones")
+     */
+    private $Marque;
+
     public function __construct()
     {
         $this->stockSmartphones = new ArrayCollection();
@@ -69,18 +74,6 @@ class Smartphone
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMarque(): ?string
-    {
-        return $this->Marque;
-    }
-
-    public function setMarque(string $Marque): self
-    {
-        $this->Marque = $Marque;
-
-        return $this;
     }
 
     public function getModel(): ?string
@@ -176,5 +169,17 @@ class Smartphone
     public function __toString()
     {
         return $this->getMarque()." - ".$this->getName();
+    }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->Marque;
+    }
+
+    public function setMarque(?Marque $Marque): self
+    {
+        $this->Marque = $Marque;
+
+        return $this;
     }
 }
