@@ -5,10 +5,19 @@
 
 {% block body %}
 
-	<div class="container my-5">
-		<h1>Smartphone</h1>
+<div class="container my-5">
+	<h1>
+		{{ smartphone.Name }}
+	</h1>
 
-		<div class="row">
+	<div class="row">
+		<div class="col-md-3">
+			{% for image in smartphone.images %}
+			<img src=" {{ asset('/images/smartphones/'~ image.imageName)}}" alt="" width="75%" height="80%">
+
+			{% endfor %}
+		</div>
+		<div class="col-md-8">
 			<table class="table">
 				<tbody>
 					<tr>
@@ -17,29 +26,42 @@
 					</tr>
 					<tr>
 						<th>Marque</th>
-						<td>{{ smartphone.Marque }}</td>
+						<td>{{ smartphone.Marque.name }}</td>
 					</tr>
 					<tr>
 						<th>Model</th>
 						<td>{{ smartphone.Model }}</td>
 					</tr>
-					<tr>
-						<th>Name</th>
-						<td>{{ smartphone.Name }}</td>
-					</tr>
+
 					<tr>
 						<th>Description</th>
 						<td>{{ smartphone.description }}</td>
 					</tr>
+					<tr>
+						<th>Actions</th>
+						<td>
+							<div class="row">
+								<a class="btn btn-info mr-2"
+									href="{{ path('smartphone_edit', {'id': smartphone.id}) }}">Edit</a>
+
+								{{ include('smartphone/_delete_form.html.twig') }}
+							</div>
+
+
+						</td>
+					</tr>
+
+
 				</tbody>
 			</table>
 		</div>
+
 	</div>
 
+	<a class="btn btn-success my-3" href="{{ path('smartphone_index') }}">back to list</a>
 
-	<a href="{{ path('smartphone_index') }}">back to list</a>
 
-	<a href="{{ path('smartphone_edit', {'id': smartphone.id}) }}">edit</a>
+</div>
 
-	{{ include('smartphone/_delete_form.html.twig') }}
+
 {% endblock %}
