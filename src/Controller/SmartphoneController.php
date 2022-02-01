@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Image;
 use App\Entity\Smartphone;
 use App\Form\SmartphoneType;
+use App\Repository\MarqueRepository;
 use App\Repository\SmartphoneRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,22 +18,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class SmartphoneController extends AbstractController
 {
     /**
-     * @Route("/", name="smartphone_index", methods={"GET"})
+     * @Route("/", name="smartphone_index", methods={"GET", "POST"})
      */
-    public function index(Request $request, SmartphoneRepository $smartphoneRepository): Response
+    public function index(Request $request, SmartphoneRepository $smartphoneRepository, MarqueRepository $marqueRepository): Response
     {
         $filtre_marque  = $request->query->get('marque');
 
+        //dd($request);
+        
+
+        $list_marques = $marqueRepository->findAll();
+
+       
         if($filtre_marque){
-            $smartphones = $smartphoneRepository->findBy([
-                'Marque' => $filtre_marque
-            ]);
+            $smartphones = $marqueRepository->findOneBy([
+                'name' => $filtre_marque
+            ])->getSmartphones();
         }else{
             $smartphones = $smartphoneRepository->findAll();
         }
+        //dd($smartphones);
 
         return $this->render('smartphone/index.html.twig', [
             'smartphones' => $smartphones,
+            'marques' => $list_marques,
             'choice_marque' => $filtre_marque
         ]);
     }
