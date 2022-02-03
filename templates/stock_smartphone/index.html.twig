@@ -10,12 +10,12 @@
 		<div class="row">
 			<div class="col-md-7">
 				<h3>Stock for
-					{{ smartphone.marque }}
+					{{ smartphone.marque.name }}
 					{{ smartphone.name }}</h3>
 
 			</div>
 			<div class="col-md-5">
-				<a class="btn btn-success btn-block" href="{{ path('stock_smartphone_new', {'id_smartphone':smartphone.id,'marque':smartphone.marque}) }}">Create new</a>
+				<a class="btn btn-success btn-block" href="{{ path('stock_smartphone_new', {'id_smartphone':smartphone.id,'marque':smartphone.marque.name}) }}">Create new</a>
 
 			</div>
 
@@ -47,7 +47,16 @@
 							<td>{{ stock_smartphone.year }}</td>
 							<td>{{ stock_smartphone.price }}</td>
 							<td>{{ stock_smartphone.quantity }}</td>
-							<td>{{ stock_smartphone.status }}</td>
+							<td>
+								{% if stock_smartphone.state == true %}
+
+									<span class="text-success">New</span>
+								{% else %}
+									<span class="text-warning">Used</span>
+
+								{% endif %}
+							</td>
+
 							<td>{{ stock_smartphone.imei }}</td>
 							<td>{{ stock_smartphone.sn }}</td>
 							<td>
@@ -55,15 +64,13 @@
 								<a class="btn btn-danger" href="{{ path('stock_smartphone_edit', {'id': stock_smartphone.id, 'id_smartphone': stock_smartphone.smartphone.id}) }}">edit</a>
 							</td>
 						</tr>
-					{% else %}
-						<tr>
-							<td colspan="11">no records found</td>
-						</tr>
-					{% endfor %}
+					</tbody>
 				</tbody>
-			</table>
-		</div>
-	</div>
-
-
-{% endblock %}
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="11">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table></div></div>{% endblock %}

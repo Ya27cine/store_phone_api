@@ -49,6 +49,7 @@ class StockSmartphoneController extends AbstractController
      */
     public function new($marque, $id_smartphone,Request $request,SmartphoneRepository $smartphoneRepository): Response
     {
+
         // get smartphone
         $smartphone = $smartphoneRepository->find($id_smartphone);
 
@@ -57,11 +58,18 @@ class StockSmartphoneController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
+            // connt vitant with smartphone
+            $stockSmartphone->setSmartphone( $smartphone );
+
             $entityManager->persist($stockSmartphone);
             $entityManager->flush();
 
-            return $this->redirectToRoute('stock_smartphone_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('stock_smartphone_index', [
+                'marque' => $smartphone->getMarque()->getName(),
+                'id' => $smartphone->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('stock_smartphone/new.html.twig', [
@@ -100,7 +108,7 @@ class StockSmartphoneController extends AbstractController
 
             return $this->redirectToRoute('stock_smartphone_index', [
                 'id' => $smartphone->getId(),
-                'marque' => $smartphone->getMarque()
+                'marque' => $smartphone->getMarque()->getName()
             ], Response::HTTP_SEE_OTHER);
         }
 

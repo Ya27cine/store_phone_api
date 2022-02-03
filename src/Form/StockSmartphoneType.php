@@ -8,6 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\Smartphone;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class StockSmartphoneType extends AbstractType
 {
@@ -20,7 +22,14 @@ class StockSmartphoneType extends AbstractType
             ->add('year')
             ->add('price')
             ->add('quantity')
-            ->add('status')
+            ->add('state', ChoiceType::class, [
+                'label' => "State",
+                'choices'  => [
+                    'Unknown' => null,
+                    'New' => true,
+                    'Used' => false,
+                ],
+            ])
             ->add('imei')
             ->add('sn')
             // ->add('smartphone', EntityType::class, [

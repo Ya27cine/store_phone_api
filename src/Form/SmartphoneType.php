@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Image;
 use App\Entity\Marque;
 use App\Entity\Smartphone;
+use App\Repository\MarqueRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +19,12 @@ class SmartphoneType extends AbstractType
         $builder
             ->add('Marque', EntityType::class, [
                 'class' => Marque::class,
-                'choice_label' => 'name'
+                'choice_label' => 'name',
+                  'query_builder' => function (MarqueRepository $mr) {
+                          return $mr->createQueryBuilder('m')
+                             ->orderBy('m.name', 'ASC')
+                          ;
+                      },
             ])
             ->add('Model')
             ->add('Name')

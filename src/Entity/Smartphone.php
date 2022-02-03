@@ -62,6 +62,7 @@ class Smartphone
 
     /**
      * @ORM\ManyToOne(targetEntity=Marque::class, inversedBy="smartphones")
+     * @ORM\OrderBy({"name" = "DESC"})
      */
     private $Marque;
 

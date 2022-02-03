@@ -7,7 +7,7 @@
 	<div class="container">
 		<div>
 			<h1>
-				{{ stock_smartphone.smartphone.marque }}
+				{{ stock_smartphone.smartphone.marque.name }}
 				/
 
 				{{ stock_smartphone.smartphone.name }}
@@ -47,7 +47,7 @@
 				</tr>
 				<tr>
 					<th>Status</th>
-					<td>{{ stock_smartphone.status }}</td>
+					<td>{{  stock_smartphone.state }}</td>
 				</tr>
 				<tr>
 					<th>Imei</th>
@@ -60,7 +60,7 @@
 			</tbody>
 		</table>
 
-		<a class="btn btn-primary" href="{{ path('stock_smartphone_index', {'id': stock_smartphone.smartphone.id, 'marque': stock_smartphone.smartphone.Marque}) }}">back to list</a>
+		<a class="btn btn-primary" href="{{ path('stock_smartphone_index', {'id': stock_smartphone.smartphone.id, 'marque': stock_smartphone.smartphone.Marque.name}) }}">back to list</a>
 
 		<a class="btn btn-info" href="{{ path('stock_smartphone_edit', {'id': stock_smartphone.id, 'id_smartphone': stock_smartphone.smartphone.id }) }}">edit</a>
 

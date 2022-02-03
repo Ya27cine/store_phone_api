@@ -45,7 +45,7 @@
 								<td>{{ smartphone.Name }}</td>
 								{# <td>{{ smartphone.description }}</td> #}
 								<td>
-									{# <a class="btn btn-info" href="{{ path('stock_smartphone_index', {'id': smartphone.id, 'marque': smartphone.Marque.name}) }}">Variants</a> #}
+									<a class="btn btn-info" href="{{ path('stock_smartphone_index', {'id': smartphone.id, 'marque': smartphone.Marque.name}) }}">Variants</a>
 									<a class="btn btn-primary" href="{{ path('smartphone_show', {'id': smartphone.id}) }}">show</a>
 									<a class="btn btn-danger" href="{{ path('smartphone_edit', {'id': smartphone.id}) }}">edit</a>
 								</td>

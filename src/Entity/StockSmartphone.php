@@ -66,10 +66,7 @@ class StockSmartphone
      */
     private $quantity;
 
-    /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $status;
+   
 
     /**
      * @ORM\ManyToOne(targetEntity=Smartphone::class, inversedBy="stockSmartphones")
@@ -85,6 +82,11 @@ class StockSmartphone
      * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $sn;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $state;
 
     public function getId(): ?int
     {
@@ -163,18 +165,6 @@ class StockSmartphone
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getSmartphone(): ?Smartphone
     {
         return $this->smartphone;
@@ -207,6 +197,18 @@ class StockSmartphone
     public function setSn(?string $sn): self
     {
         $this->sn = $sn;
+
+        return $this;
+    }
+
+    public function getState(): ?bool
+    {
+        return $this->state;
+    }
+
+    public function setState(?bool $state): self
+    {
+        $this->state = $state;
 
         return $this;
     }

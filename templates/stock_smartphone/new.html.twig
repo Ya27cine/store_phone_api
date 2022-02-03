@@ -9,13 +9,13 @@
 		<div class="row my-4">
 			<div class="col-md-7">
 				<h4>Create new variant for
-					{{ smartphone.marque}}
+					{{ smartphone.marque.name}}
 					/
 					{{smartphone.name}}</h4>
 
 			</div>
 			<div class="col-md-5">
-				<a class="btn btn-block btn-info" href="{{ path('stock_smartphone_index',{'marque': smartphone.marque,'id': smartphone.id}) }}">back to list</a>
+				<a class="btn btn-block btn-info" href="{{ path('stock_smartphone_index',{'marque': smartphone.marque.name,'id': smartphone.id}) }}">back to list</a>
 
 			</div>
 		</div>

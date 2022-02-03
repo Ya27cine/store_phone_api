@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<a class="navbar-brand" href="#">Stock
+	<a class="navbar-brand" href="#">
+		<i class="fas fa-store-alt text-primary"></i>
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -9,7 +10,8 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
 				<a class="nav-link" href="{{ path('smartphone_index') }}">
-					Smartphones
+					<i class="fas fa-mobile-alt"></i>
+					Phone
 					<span class="sr-only"></span>
 				</a>
 			</li>
@@ -17,21 +19,23 @@
 
 			<li class="nav-item active">
 				<a class="nav-link" href="#">
+					<i class="fas fa-ethernet"></i>
 					Accessoires
 					<span class="sr-only"></span>
 				</a>
 			</li>
 
-			<li class="nav-item active">
-				<a class="nav-link" href="{{ path('marque_index') }}">
-					Marques
-					<span class="sr-only"></span>
-				</a>
-			</li>
-
 
 			<li class="nav-item active">
 				<a class="nav-link" href="#">
+					<i class="fas fa-thermometer-three-quarters text-danger"></i>
+					Etat Stock
+					<span class="sr-only"></span>
+				</a>
+			</li>
+			<li class="nav-item active">
+				<a class="nav-link" href="#">
+					<i class="fas fa-info text-info"></i>
 					Infos
 					<span class="sr-only"></span>
 				</a>
